@@ -64,7 +64,7 @@
 									<td>${total}</td>										
 								</tr>
 								<tr>
-									<td colspan="3">Return On Investment</td>										
+									<td colspan="3">Return On Investment (${won}/${played})</td>										
 									<td>
 										<fmt:formatNumber type="number" maxFractionDigits="2" value="${ ( total + investment) / investment }" />									
 									</td>															
