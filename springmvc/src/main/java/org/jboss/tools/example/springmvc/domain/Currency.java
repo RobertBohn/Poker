@@ -28,7 +28,7 @@ UNLOCK TABLES;
 ***********/
 
 @Entity
-@Table
+@Table(name="currency")
 public class Currency implements Serializable
 {	
 	/** Default value included to remove warning. Remove or modify at will. **/

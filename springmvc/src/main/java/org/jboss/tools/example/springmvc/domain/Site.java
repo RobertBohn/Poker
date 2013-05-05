@@ -29,7 +29,7 @@ UNLOCK TABLES;
 ***********/
 
 @Entity
-@Table
+@Table(name="site")
 public class Site implements Serializable
 {	
 	/** Default value included to remove warning. Remove or modify at will. **/

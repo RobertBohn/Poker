@@ -36,7 +36,7 @@ CREATE TABLE `tournament` (
 ***********/
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "start"))
+@Table(name="tournament",uniqueConstraints = @UniqueConstraint(columnNames = "start"))
 public class Tournament implements Serializable
 {
    /** Default value included to remove warning. Remove or modify at will. **/

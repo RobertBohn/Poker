@@ -25,7 +25,7 @@ UNLOCK TABLES;
 ***********/
 
 @Entity
-@Table
+@Table(name="game")
 public class Game implements Serializable
 {	
 	/** Default value included to remove warning. Remove or modify at will. **/

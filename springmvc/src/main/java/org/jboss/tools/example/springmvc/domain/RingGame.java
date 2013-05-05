@@ -34,7 +34,7 @@ CREATE TABLE `ringgame` (
 ***********/
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "start"))
+@Table(name="ringgame",uniqueConstraints = @UniqueConstraint(columnNames = "start"))
 public class RingGame implements Serializable
 {
    /** Default value included to remove warning. Remove or modify at will. **/
