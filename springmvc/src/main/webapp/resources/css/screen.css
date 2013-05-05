@@ -130,14 +130,16 @@ input {
   padding-left: 6px;
   font-size:11px;
   padding:5px 5px;
+  text-align:center;
 }
 
 .simpletablestyle th {
-	background: url(../gfx/bkg-blkheader.png) black repeat-x top left;
+  background: url(../gfx/bkg-blkheader.png) black repeat-x top left;
   font-size:12px;
   font-weight:normal;
   padding:0 10px 0 5px;
   border-bottom:#999999 dotted 1px;
+  text-align:center;
 }
 
 .simpletablestyle thead {

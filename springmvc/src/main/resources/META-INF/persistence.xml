@@ -6,7 +6,7 @@
       <properties>
 		 <property name="jboss.entity.manager.factory.jndi.name" value="java:jboss/spring-quickstart/persistence" />
          <property name="hibernate.hbm2ddl.auto" value="validate" />
-         <property name="hibernate.show_sql" value="true" />
+         <property name="hibernate.show_sql" value="false" />
       </properties>
    </persistence-unit>
 </persistence>

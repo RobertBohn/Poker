@@ -41,16 +41,22 @@
 								</tr>
 							</thead>
 							<tbody>
+								<c:set var="rows" value="0"/>
 								<c:set var="total" value="0"/>
 								<c:set var="minutes" value="0"/>
 								<c:forEach items="${ringgames}" var="ringgame">
+									<c:set var="rows" value="${rows+1}"/>
 									<c:set var="total" value="${total+ringgame.net}"/>
 									<c:set var="minutes" value="${minutes+ringgame.minutes}"/>
-									<tr>
-										<td>${ringgame.start}</td>
-										<td>${ringgame.minutes}</td>
-										<td>${ringgame.DisplayAmount(ringgame.net)}</td>
-									</tr>
+									
+									<c:if test="${rows > ringgames.size() - 10}">									
+										<tr>
+											<td>${ringgame.start}</td>
+											<td>${ringgame.minutes}</td>
+											<td>${ringgame.DisplayAmount(ringgame.net)}</td>
+										</tr>
+									</c:if>
+									
 								</c:forEach>
 								<tr>
 									<td>Total</td>										

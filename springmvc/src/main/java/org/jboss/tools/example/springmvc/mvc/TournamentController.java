@@ -1,18 +1,25 @@
 package org.jboss.tools.example.springmvc.mvc;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jboss.tools.example.springmvc.domain.Tournament;
 import org.jboss.tools.example.springmvc.repo.PokerDao;
+import org.jboss.tools.example.springmvc.valid.PokerDateEditor;
 import org.jboss.tools.example.springmvc.valid.TournamentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,15 +29,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TournamentController 
 {	
+	private static Log log = LogFactory.getLog(TournamentController.class.getSimpleName());
+	
     @Autowired
-    private PokerDao pokerDao;      
+    private PokerDao pokerDao;        
+       
+    @Resource(name="tournamentType")
+    HashMap<String, String> tournamentType;    
     
     @Autowired
-    TournamentValidator tournamentDatesValidator;    
+    TournamentValidator tournamentValidator;    
     
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {    	
-    	binder.setValidator(tournamentDatesValidator);
+    @InitBinder("newTournament")
+    protected void initBinder(WebDataBinder binder) 
+    {   
+    	final PokerDateEditor editor = new PokerDateEditor(new SimpleDateFormat("M/d/yyyy hh:mm a"), false);
+    	binder.registerCustomEditor(Timestamp.class, editor);
+    	binder.setValidator(tournamentValidator);
     }     
         
     // View Tournaments
@@ -61,13 +76,16 @@ public class TournamentController
   	   	Tournament tournament = new Tournament();
     	tournament.setType(new Long(0));
     	tournament.setSite(new Long(1));
-    	tournament.setGame(new Long(1));
-    	tournament.setEntry(new Long(45));
-    	tournament.setFee(new Long(5));  	    	
+    	tournament.setGame(new Long(4));
+    	tournament.setEntry(new Long(47));
+    	tournament.setFee(new Long(3));  	    	
  		tournament.setStart(new Timestamp(now.getTime()));
-		tournament.setEnd(new Timestamp(now.getTime()));   	    	
-    
+		tournament.setEnd(new Timestamp(now.getTime())); 	    	    		
+		
         model.addAttribute("newTournament", tournament);
+        model.addAttribute("dao", pokerDao);
+        model.addAttribute("type", tournamentType);
+        
         return "add";
     }
    
@@ -81,6 +99,13 @@ public class TournamentController
         }
         else 
         {
+        	for (ObjectError error : result.getAllErrors()) 
+        	{
+        		log.info(error.toString());           		
+           	}       	        	
+        	
+            model.addAttribute("dao", pokerDao);
+            model.addAttribute("type", tournamentType);
             return "add";
         }
     }

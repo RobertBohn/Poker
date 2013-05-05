@@ -24,7 +24,7 @@ public class TournamentValidator extends BaseBeanValidator
 		{			
 			if (tournament.getMinutes() <= 0) 
 			{
-				errors.rejectValue("end", null, "end must be after start");						
+				errors.rejectValue("end", "newTournament.badEnd");						
 			}	
 		}
 		
@@ -33,7 +33,7 @@ public class TournamentValidator extends BaseBeanValidator
 		{			
 			if (tournament.getPlace() > tournament.getPlayers()) 
 			{
-				errors.rejectValue("place", null, "place can not exceed players");
+				errors.rejectValue("place", "newTournament.badPlace");
 			}
 		}				
 	}

@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 
 import org.jboss.tools.example.springmvc.domain.Game;
 import org.jboss.tools.example.springmvc.domain.RingGame;
+import org.jboss.tools.example.springmvc.domain.Site;
 import org.jboss.tools.example.springmvc.domain.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,15 @@ public class PokerDaoImpl implements PokerDao {
 	    CriteriaQuery<Game> criteria = cb.createQuery(Game.class);
 	    Root<Game> game = criteria.from(Game.class);
         criteria.select(game).orderBy(cb.asc(game.get("name")));
+        return em.createQuery(criteria).getResultList();         		
+	}
+
+	@Override
+	public List<Site> Sites() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+	    CriteriaQuery<Site> criteria = cb.createQuery(Site.class);
+	    Root<Site> site = criteria.from(Site.class);
+        criteria.select(site).orderBy(cb.asc(site.get("name")));
         return em.createQuery(criteria).getResultList();         		
 	}
 	

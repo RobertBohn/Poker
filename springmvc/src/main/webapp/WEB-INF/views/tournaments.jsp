@@ -36,38 +36,41 @@
 							<thead>
 								<tr>
 									<th>Date</th>
+									<th>Entry</th>
 									<th>Players</th>
 									<th>Place</th>
 									<th>Win</th>									
 								</tr>
 							</thead>
 							<tbody>
+								<c:set var="rows" value="0"/>
 								<c:set var="total" value="0"/>
 								<c:set var="investment" value="0"/>
 								<c:forEach items="${tournaments}" var="tournament">
+									<c:set var="rows" value="${rows+1}"/>
 									<c:set var="total" value="${total+tournament.net}"/>
-									<c:set var="investment" value="${investment+tournament.fee+tournament.entry}"/>
-									<tr>
-										<td>${tournament.start}</td>
-										<td>${tournament.players}</td>
-										<td>
-											<c:if test="${tournament.place==1}"><span>Win</span></c:if>
-											<c:if test="${tournament.place>1}">${tournament.place}</c:if>									
-										</td>										
-										<td>
-											<c:if test="${tournament.win>0}">${tournament.DisplayAmount(tournament.win)}</c:if>
-										</td>
-									</tr>
+									<c:set var="investment" value="${investment+tournament.fee+tournament.entry}"/>									
+									
+									<c:if test="${rows > tournaments.size() - 10}">									
+										<tr>
+											<td><fmt:formatDate value="${tournament.start}" pattern="M/d/yyyy"/></td>
+											<td>${tournament.entry}+${tournament.fee}</td>
+											<td>${tournament.players}</td>										
+											<td>${tournament.place}</td>										
+											<td>
+												<c:if test="${tournament.win>0}">
+													${tournament.DisplayAmount(tournament.win)}
+												</c:if>
+											</td>
+										</tr>									
+									</c:if>
+																		
 								</c:forEach>
 								<tr>
-									<td colspan="3">Total Net Winnings</td>										
-									<td>${total}</td>										
+									<td colspan="5" style="text-align:left; border-top:#333333 solid 1px; background: #ffffff;">Total Net Winnings: ${total}</td>										
 								</tr>
 								<tr>
-									<td colspan="3">Return On Investment (${won}/${played})</td>										
-									<td>
-										<fmt:formatNumber type="number" maxFractionDigits="2" value="${ ( total + investment) / investment }" />									
-									</td>															
+									<td colspan="5" style="text-align:left; background: #ffffff;">Wins: (${won}/${played}) Return on Investment: <fmt:formatNumber type="number" maxFractionDigits="2" value="${ ( total + investment) / investment }" /></td>															
 								</tr>																									
 							</tbody>
 						</table>						

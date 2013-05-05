@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.jboss.tools.example.springmvc.domain.Game;
 import org.jboss.tools.example.springmvc.domain.RingGame;
+import org.jboss.tools.example.springmvc.domain.Site;
 import org.jboss.tools.example.springmvc.domain.Tournament;
 
 public interface PokerDao {
     public List<Game> Games();
+    public List<Site> Sites();
     public List<Tournament> Tournaments();
     public List<RingGame> RingGames();
     public Game getGame(Long id);

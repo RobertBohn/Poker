@@ -1,5 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <html>
 
@@ -15,7 +19,7 @@
 				<img src="<c:url value="/static/resources/gfx/dualbrand_logo.png"/>"/>
 			</div>
 			<div id="content">
-				<h1>Welcome to JBoss!</h1>
+				<h1><fmt:message key="tournament.title"/></h1>
 
 				<div>
 					<p>You have successfully deployed a Spring MVC web application.</p>
@@ -31,17 +35,17 @@
 						<tbody>
 							<tr>
 								<td><form:label path="type">Type:</form:label></td>
-								<td><form:input path="type"/></td>
+								<td><form:select path="type" items="${type}"/></td>
 								<td><form:errors class="invalid" path="type"/></td>
 							</tr>
 							<tr>
-								<td><form:label path="site">Site:</form:label></td>
-								<td><form:input path="site"/></td>
+								<td><form:label path="site">Site:</form:label></td>								
+								<td><form:select path="site" items="${dao.Sites()}" itemValue="id" itemLabel="name"/></td>
 								<td><form:errors class="invalid" path="site"/></td>
 							</tr>
 							<tr>
 								<td><form:label path="game">Game:</form:label></td>								
-								<td><form:input path="game"/></td>
+								<td><form:select path="game" items="${dao.Games()}" itemValue="id" itemLabel="name"/></td>
 								<td><form:errors class="invalid" path="game"/></td>
 							</tr>	
 							<tr>

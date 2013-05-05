@@ -87,6 +87,7 @@ public class Site implements Serializable
 	@OneToOne(cascade=CascadeType.ALL,targetEntity=Currency.class)
 	@JoinColumn(name="currency",insertable=false,updatable=false) 
 	private Currency siteCurrency;
+	
 	public Currency getSiteCurrency() {
 		return siteCurrency;
 	}    

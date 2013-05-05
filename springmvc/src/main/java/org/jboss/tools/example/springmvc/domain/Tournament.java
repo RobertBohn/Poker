@@ -56,12 +56,10 @@ public class Tournament implements Serializable
    private Long site;
 
    @NotNull
-   private Long game;
+   private Long game;   
    
-   @NotNull
-   private Timestamp start;
-	
-   @NotNull
+   private Timestamp start;	
+   
    private Timestamp end;
    
    @NotNull
